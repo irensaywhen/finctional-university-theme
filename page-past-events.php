@@ -7,11 +7,11 @@
   ></div>
   <div class="page-banner__content container container--narrow">
     <h1 class="page-banner__title">
-      All events
+      Past events
     </h1>
     <div class="page-banner__intro">
       <p>
-       Discover our events
+        A recap of our past events
       </p>
     </div>
   </div>
@@ -19,8 +19,25 @@
 
 <div class="container container--narrow page-section">
   <?php
-    while(have_posts()) {
-      the_post(); 
+    $today = date('Ymd');
+    $past_events = new WP_Query([
+      'paged' => get_query_var('paged', 1),
+      'post_type' => 'event',
+      'orderby' => 'meta_value_num',
+      'meta_key' => 'event_date',
+      'order' => 'ASC',
+      'meta_query' => [
+        [
+          'key' => 'event_date',
+          'compare' => '<',
+          'value' => $today,
+          'type' => 'numeric'
+        ]
+      ]
+    ]);
+
+    while($past_events->have_posts()) {
+      $past_events->the_post(); 
   ?>
 
       <div class="event-summary">
@@ -61,14 +78,10 @@
       </div>
   <?php  } 
   
-  echo paginate_links();
+  echo paginate_links([
+    'total' => $past_events->max_num_pages
+  ]);
   ?>
-
-  <hr class="section-break" />
-  <p>
-    Looking for a recap of our past events?
-    <a href="<?php echo site_url('/past-events'); ?>">Check it out!</a>
-  </p>
 </div>
 
 <?php  get_footer(); ?>

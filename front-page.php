@@ -26,9 +26,22 @@
           </h2>
           
           <?php
-            $homepage_events = new WP_Query([
+            $today = date('Ymd');
+
+             $homepage_events = new WP_Query([
               'posts_per_page' => 2,
-              'post_type' => 'event'
+              'post_type' => 'event',
+              'orderby' => 'meta_value_num',
+              'meta_key' => 'event_date',
+              'order' => 'ASC',
+              'meta_query' => [
+                [
+                  'key' => 'event_date',
+                  'compare' => '>=',
+                  'value' => $today,
+                  'type' => 'numeric'
+                ]
+              ]
             ]);
 
             while($homepage_events->have_posts()) {
@@ -40,10 +53,15 @@
                 href="<?php the_permalink(); ?>"
               >
                 <span class="event-summary__month">
-                  <?php the_time('M'); ?>
+                  <?php 
+                    $event_date = new DateTime(get_field('event_date'));
+                    echo $event_date->format('M');
+                  ?>
                 </span>
                 <span class="event-summary__day">
-                  <?php the_time('d'); ?>
+                  <?php 
+                    echo $event_date->format('d');
+                  ?>
                 </span>
               </a>
               <div class="event-summary__content">
@@ -78,7 +96,7 @@
 
           <p class="t-center no-margin">
             <a 
-              href="<?php echo get_post_type_archive_link('evnet'); ?>" 
+              href="<?php echo get_post_type_archive_link('event'); ?>" 
               class="btn btn--blue"
             >
               View All Events
