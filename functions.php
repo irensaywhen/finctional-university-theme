@@ -16,6 +16,12 @@ function university_features() {
   register_nav_menu('main-header-menu', 'Main Header Menu');
   register_nav_menu('footer-menu-first', 'The First Footer Menu');
   register_nav_menu('footer-menu-second', 'The Second Footer Menu');
+  add_theme_support('post-thumbnails');
+  // Add custom cropping params. The first arg is the nickname
+  // the last argument allows cropping
+  add_image_size('professorLandscape', 400, 260, true);
+  add_image_size('professorPortrait', 480, 650, true);
+  add_image_size('pageBanner', 1500, 350, true);
   add_theme_support('title-tag');
 }
 

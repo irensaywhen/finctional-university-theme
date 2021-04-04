@@ -2,38 +2,35 @@
   get_header();
 
   while(have_posts()) {
-    the_post(); ?>
+    the_post(); 
+    
+    $page_banner_image = get_field('page_banner_background_image');
+    ?>
 
     <div class="page-banner">
       <div
         class="page-banner__bg-image"
-        style="background-image: url(<?php echo get_theme_file_uri('images/ocean.jpg'); ?>"
+        style="background-image: url(<?php echo $page_banner_image['sizes']['pageBanner']; ?>"
       ></div>
       <div class="page-banner__content container container--narrow">
         <h1 class="page-banner__title"><?php the_title(); ?></h1>
         <div class="page-banner__intro">
-          <p>Don't forget to replace</p>
+          <p><?php the_field('page_banner_subtitle'); ?></p>
         </div>
       </div>
     </div>
 
     <div class="container container--narrow page-section">
-      <div class="metabox metabox--position-up metabox--with-home-link">
-        <p>
-          <a 
-            class="metabox__blog-home-link" 
-            href="<?php echo get_post_type_archive_link('event'); ?>"
-          >
-            All events
-          </a>
-          <span class="metabox__main">
-            <?php the_title(); ?>
-          </span>
-        </p>
-      </div>
 
       <div class="generic-content">
-        <?php the_content(); ?>
+        <div class="row group">
+          <div class="one-third">
+            <?php the_post_thumbnail('professorPortrait'); ?>
+          </div>
+          <div class="two-thirds">
+            <?php the_content(); ?>
+          </div>
+        </div>
       </div>
 
       <?php 
@@ -43,7 +40,7 @@
       ?> 
 
         <h2 class="headline headline--medium">
-          Related programs
+          Subject(s) taught
         </h2>
         <hr class="section-break">
         <ul class="link-list min-list">
