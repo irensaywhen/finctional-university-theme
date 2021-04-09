@@ -81,6 +81,9 @@
       ></i>
     </div>
   </div>
+  <div class="container">
+    <div class="search-overlay__results"></div>
+  </div>
 </div>
 
 <?php wp_footer(); ?>
