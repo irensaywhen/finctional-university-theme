@@ -41,7 +41,7 @@
                 echo 'class="current-menu-item"';
               } ?>
               >
-                <a href="<?php echo get_post_type_archive_link('evnet'); ?>">
+                <a href="<?php echo get_post_type_archive_link('event'); ?>">
                   Events
                 </a>
               </li>

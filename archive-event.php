@@ -1,21 +1,11 @@
-<?php get_header(); ?>
+<?php 
+get_header(); 
+page_banner([
+  'title' => 'All events',
+  'subtitle' => 'Discover our events'
+]);
 
-<div class="page-banner">
-  <div
-    class="page-banner__bg-image"
-    style="background-image: url(<?php echo get_theme_file_uri('images/ocean.jpg'); ?>"
-  ></div>
-  <div class="page-banner__content container container--narrow">
-    <h1 class="page-banner__title">
-      All events
-    </h1>
-    <div class="page-banner__intro">
-      <p>
-       Discover our events
-      </p>
-    </div>
-  </div>
-</div>
+?>
 
 <div class="container container--narrow page-section">
   <?php
