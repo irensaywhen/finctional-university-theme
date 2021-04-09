@@ -26,10 +26,12 @@ class Search {
   // 3. methods
   openOverlay() {
     this.searchOverlay.addClass('search-overlay--active');
+    $('body').addClass('body-no-scroll');
   }
 
   closeOverlay() {
     this.searchOverlay.removeClass('search-overlay--active');
+    $('body').removeClass('body-no-scroll');
   }
 }
 
